@@ -1,0 +1,72 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans 'Redirecting' %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin: 20px 0;
+            color: #555;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body onload="redirectToHome()">
+    <div class="container">
+        <h1>{% trans 'Success!' %}</h1>
+        <p>{% trans 'Press the button below to go to the home page, or just wait for 10 seconds.' %}</p>
+        <a href="{% url 'app:home' %}" class="button">{% trans 'Back to home' %}</a>
+    </div>
+    <script>
+        function redirectToHome() {
+            setTimeout(function() {
+                window.location.href = "{% url 'app:home' %}";
+            }, 10000); // 10000 milliseconds = 10 seconds
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,804 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 12px; /* Initial width of the scrollbar */
+  transition: width 0.3s ease; /* Smooth transition for width */
+}
+
+/* Handle (Thumb) with gradient */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff7e5f, #feb47b); /* Warm gradient */
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+  transition: background-color 0.3s ease, width 0.3s ease; /* Smooth transition for color and size */
+}
+
+/* Hover effect on the scrollbar handle */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #fe8c00,
+    #f83600
+  ); /* Darker gradient on hover */
+  width: 16px; /* Increase width on hover */
+}
+
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light background for the track */
+  border-radius: 10px;
+  transition: background-color 0.3s ease; /* Smooth transition for track color */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap");
+
+:root {
+  /* Colors */
+  --brand-color: hsl(46, 100%, 50%);
+  --black: hsl(0, 0%, 0%);
+  --white: hsl(0, 0%, 100%);
+  /* Fonts */
+  --font-title: "Montserrat", sans-serif;
+  --font-text: "Lato", sans-serif;
+}
+
+/* RESET */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+
+.flow > * + * {
+  margin-top: var(--flow-space, 1em);
+}
+
+/* CARD COMPONENT */
+
+.cardi {
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  display: grid;
+  place-items: center;
+  width: 80vw;
+  max-width: 21.875rem;
+  height: 28.125rem;
+  overflow: hidden;
+  border-radius: 0.625rem;
+  box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+.cardi > * {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.card__background {
+  object-fit: cover;
+  max-width: 100%;
+  height: 100%;
+}
+
+.card__content {
+  --flow-space: 0.9375rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: flex-end;
+  height: 55%;
+  padding: 12% 1.25rem 1.875rem;
+  background: linear-gradient(
+    180deg,
+    hsla(0, 0%, 0%, 0) 0%,
+    hsla(0, 0%, 0%, 0.3) 10%,
+    hsl(0, 0%, 0%) 100%
+  );
+}
+
+.card__content--container {
+  --flow-space: 1.25rem;
+}
+
+.card__title {
+  font-weight: 9 00;
+  position: relative;
+  width: fit-content;
+  width: -moz-fit-content; /* Prefijo necesario para Firefox  */
+}
+
+.card__title::after {
+  content: "";
+  position: absolute;
+  height: 0.3125rem;
+  width: calc(100% + 1.25rem);
+  bottom: calc((1.25rem - 0.5rem) * -1);
+  left: -1.25rem;
+  background-color: var(--brand-color);
+}
+
+.card__button {
+  padding: 0.75em 1.6em;
+  width: fit-content;
+  width: -moz-fit-content; /* Prefijo necesario para Firefox  */
+  font-variant: small-caps;
+  font-weight: bold;
+  border-radius: 0.45em;
+  border: none;
+  background-color: var(--brand-color);
+  font-family: var(--font-title);
+  font-size: 1.125rem;
+  color: var(--black);
+}
+
+.card__button:focus {
+  outline: 2px solid black;
+  outline-offset: -5px;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  .card__content {
+    transform: translateY(62%);
+    transition: transform 500ms ease-out;
+    transition-delay: 500ms;
+  }
+
+  .card__title::after {
+    opacity: 0;
+    transform: scaleX(0);
+    transition: opacity 1000ms ease-in, transform 500ms ease-out;
+    transition-delay: 500ms;
+    transform-origin: right;
+  }
+
+  .card__background {
+    transition: transform 500ms ease-in;
+  }
+
+  .card__content--container > :not(.card__title),
+  .card__button {
+    opacity: 0;
+    transition: transform 500ms ease-out, opacity 500ms ease-out;
+  }
+
+  .cardi:hover,
+  .cardi:focus-within {
+    transform: scale(1.05);
+    transition: transform 500ms ease-in;
+  }
+
+  .cardi:hover .card__content,
+  .cardi:focus-within .card__content {
+    transform: translateY(0);
+    transition: transform 500ms ease-in;
+  }
+
+  .cardi:focus-within .card__content {
+    transition-duration: 0ms;
+  }
+
+  .cardi:hover .card__background,
+  .cardi:focus-within .card__background {
+    transform: scale(1.3);
+  }
+
+  .cardi:hover .card__content--container > :not(.card__title),
+  .cardi:hover .card__button,
+  .cardi:focus-within .card__content--container > :not(.card__title),
+  .cardi:focus-within .card__button {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+    transition-delay: 1000ms;
+  }
+
+  .cardi:hover .card__title::after,
+  .cardi:focus-within .card__title::after {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: opacity 500ms ease-in, transform 500ms ease-in;
+    transition-delay: 500ms;
+  }
+}
+
+.poppins {
+  font-family: "Montserrat", sans-serif;
+  color: #35415b;
+  font-weight: 900;
+  font-size: 50px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+body {
+  background-color: #f4f4f4;
+}
+
+section {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.header {
+  height: 100vh;
+  /* background: url("plane-wing.jpg") no-repeat center center/cover; */
+  color: white;
+  position: relative;
+}
+
+/* General styles for navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+}
+
+/* Menu styles */
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Ensure horizontal layout on desktop */
+}
+
+.menu li {
+  margin-left: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center;
+    padding: 10px 20px; /* Adjust padding for mobile */
+  }
+
+  .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Stack list items vertically */
+    align-items: center; /* Center list items */
+    padding: 0;
+    margin-top: 20px; /* Add some space between the logo and menu */
+  }
+
+  .menu li {
+    margin: 10px 0; /* Add vertical spacing between list items */
+  }
+
+  .contact {
+    margin-top: 20px; /* Add space below the menu for the contact */
+  }
+
+  .logoimage {
+    height: 12vh; /* Adjust logo size for mobile */
+    margin-bottom: 10px; /* Add spacing below the logo */
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.logo h1 {
+  font-size: 24px;
+}
+
+.menu {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu li a:hover {
+  color: #a5a5a5;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact span {
+  font-size: 16px;
+}
+
+.header-content {
+  position: absolute;
+  top: 50%;
+  left: 37%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+}
+
+.header-content h2 {
+  font-size: 36px;
+}
+
+.header-content h1 {
+  font-size: 60px;
+  margin: 20px 0;
+}
+
+.header-content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+/* Default solid button */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #6a00f4; /* Solid color */
+  color: white;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer; /* Smooth transition on background */
+}
+
+/* Gradient background on hover */
+.btn:hover {
+  background: linear-gradient(90deg, #c426fc, #7308d1); /* Gradient on hover */
+  /* Gradient on hover */
+}
+
+/* Adding the plane icon */
+.header::before {
+  content: "";
+  position: absolute;
+  bottom: 10%; /* Position at the bottom of the header */
+  right: 5%; /* Position from the right edge */
+  width: 100px; /* Width of the icon */
+  height: 100px; /* Height of the icon */
+  background: url("plane-icon.png") no-repeat center center;
+  background-size: contain; /* Ensure the icon fits inside the dimensions */
+}
+
+.good {
+  background-color: #f4eeea;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .poppins {
+    margin-bottom: 20px;
+  }
+  section {
+    padding: 15px;
+  }
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .contact {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header-content h1 {
+    font-size: 40px;
+  }
+
+  .header-content h2 {
+    font-size: 28px;
+  }
+
+  .header-content p {
+    font-size: 18px;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    font-size: 16px;
+  }
+
+  /* Adjust plane icon size */
+  .header::before {
+    width: 60px;
+    height: 60px;
+    bottom: 5%;
+    right: 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    padding: 5px;
+  }
+
+  .menu {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .header-content h1 {
+    font-size: 32px;
+  }
+
+  .header-content h2 {
+    font-size: 24px;
+  }
+
+  .header-content p {
+    font-size: 16px;
+  }
+
+  .btn {
+    padding: 5px 15px;
+    font-size: 14px;
+  }
+
+  /* Further adjust plane icon size for small screens */
+  .header::before {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+section {
+  margin-bottom: 15px;
+}
+
+.logoimage {
+  border-radius: 100px;
+  width: auto;
+  height: 15vh; /* Set a responsive height relative to the viewport */
+  max-width: 100%; /* Ensure the image doesn’t exceed the container’s width */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .logoimage {
+    height: 12vh; /* Make the logo slightly smaller on tablets and small devices */
+  }
+}
+
+/* Media query for very small screens (e.g., mobile phones) */
+@media (max-width: 480px) {
+  .logoimage {
+    height: 10vh; /* Further decrease the size for mobile */
+    border-radius: 50px; /* Adjust the border-radius for smaller screens */
+  }
+}
+
+/* General container to hold all cards */
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  gap: 20px; /* Space between cards */
+  justify-content: center;
+  align-items: center;
+  place-items: center;
+}
+
+/* Style each card */
+.card {
+  background-color: #f4eeea;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 20px;
+}
+
+/* Image on the card */
+.card-img {
+  width: 100%;
+  border-radius: 20px;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Circle icon */
+.icon {
+  margin-top: -50px;
+  margin-bottom: 10px;
+}
+
+.icon img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Content inside the card */
+.card-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card-content p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+/* Button style */
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr 1fr; /* 2 cards per row on smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    grid-template-columns: 1fr; /* 1 card per row on mobile screens */
+  }
+}
+
+.about-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.about-images {
+  display: flex;
+  position: relative;
+  gap: 20px;
+  flex: 1;
+  margin-left: -50px; /* Move the images further left */
+}
+
+.image-container {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.image-primary {
+  width: 300px;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.secondary {
+  position: absolute;
+  right: -20px;
+  bottom: -30px;
+  border: 5px solid transparent;
+  border-image: linear-gradient(45deg, magenta, blue) 1;
+  padding: 5px;
+  border-radius: 20px;
+}
+
+.about-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  color: #35415b;
+  font-weight: 900;
+}
+
+.image-secondary {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.about-content {
+  color: #35415b;
+  flex: 1;
+  max-width: 500px;
+  margin-left: 50px; /* Ensure the text stays to the right of the images */
+}
+
+.about-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.about-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .about-section {
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .about-images {
+    justify-content: center;
+    margin-left: 0; /* Reset for mobile */
+  }
+
+  .image-primary,
+  .image-secondary {
+    width: 250px;
+    height: 350px;
+  }
+
+  .secondary {
+    position: static;
+    margin-top: 20px;
+    border: 5px solid transparent;
+  }
+
+  .about-content {
+    margin-left: 0; /* Reset for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .image-primary,
+  .image-secondary {
+    width: 200px;
+    height: 280px;
+  }
+
+  .about-content h2 {
+    font-size: 2rem;
+  }
+
+  .about-content p {
+    font-size: 0.9rem;
+  }
+}
+
+/* General Styles */
+/* Desktop Styles */
+.contact-section {
+  padding: 50px;
+}
+
+.about-title {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contact-info {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 18px;
+}
+
+
+/* Responsive Styles for Tablets and Mobile (up to 768px) */
+@media (max-width: 768px) {
+  .about-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .info-item {
+    font-size: 16px;
+  }
+}
+
+/* Responsive Styles for Small Mobile (up to 480px) */
+@media (max-width: 480px) {
+  .about-title {
+    font-size: 20px;
+  }
+
+  .info-item {
+    font-size: 14px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-item i {
+    font-size: 18px;
+  }
+}
+
+.language-switch {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Adjust button size for mobile */
+.language-switch button {
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+/* Mobile Styles (up to 768px) */
+@media (max-width: 768px) {
+  .language-switch {
+    top: 5px;
+    right: 10px;
+    gap: 5px;
+  }
+
+  .language-switch button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
+/* Small Mobile Styles (up to 480px) */
+@media (max-width: 480px) {
+  .language-switch {
+    top: 5px;
+    right: 5px;
+    gap: 5px;
+  }
+
+  .language-switch button {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+}

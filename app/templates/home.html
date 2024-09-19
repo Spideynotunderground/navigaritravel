@@ -1,0 +1,206 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigari Travel</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<style>
+  .header {
+    height: 100vh;
+    background: url("{% static 'images/bgfinal.jpg' %}") no-repeat center center;
+    background-size: 100%;
+    /* Resize the image to 50% of the container */
+    color: white;
+    position: relative;
+  }
+</style>
+
+<body>
+  <header style="background-color: #F4EEEA;" class="header">
+    <!-- Language Selection Form -->
+    <div class="language-switch">
+      <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to }}" />
+        <button type="submit" class="button is-warning is-outlined is-small" name="language" value="en">
+          English
+        </button>
+        <button type="submit" class="button is-warning is-outlined is-small" name="language" value="ru">
+          Русский
+        </button>
+      </form>
+    </div>
+  
+    <!-- Main Navbar -->
+    <nav class="navbar">
+      <img class="logoimage" src="{% static 'images/logotwo.jpg' %}" alt="navigariTravel Tour Logo">
+      <ul class="menu">
+        <li><a style="color: #35415b;" href="#tours">{% trans 'Our tours' %}</a></li>
+        <li><a style="color: #35415b;" href="#aboutus">{% trans 'About Us' %}</a></li>
+        <li><a style="color: #35415b;" href="#location">{% trans 'Our contacts' %}</a></li>
+        <li><a style="color: #35415b;" href="{% url 'app:form' %}">{% trans 'Fill up the form' %}</a></li>
+      </ul>
+    </nav>
+  
+    <!-- Header Content -->
+    <div class="header-content">
+      <h2>{% trans 'Travel Agency' %}</h2>
+      <h1>Navigari Travel</h1>
+      <p>{% trans 'Our team of professionals is ready to offer you the best travel conditions and create an unforgettable experience.' %}</p>
+    </div>
+  </header>
+  
+  <section id="tours" class="good" style="background-color: #F4EEEA;">
+    <h1 class="poppins">{% trans 'We offer' %}</h1>
+    <div class="container">
+      <!-- Tour Card 1 -->
+      <article class="cardi">
+        <img class="card__background" src="{% static 'images/europe.jpg' %}" width="1920" height="2193" />
+        <div class="card__content | flow">
+          <div class="card__content--container | flow">
+            <h2 class="card__title">{% trans 'Europe' %}</h2>
+            <p class="card__description">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in
+              labore laudantium deserunt fugiat numquam.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tour Card 2 -->
+      <article class="cardi">
+        <img class="card__background" src="{% static 'images/turkeybetter.jpg' %}" width="1920" height="2193" />
+        <div class="card__content | flow">
+          <div class="card__content--container | flow">
+            <h2 class="card__title">{% trans 'Turkey' %}</h2>
+            <p class="card__description">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in
+              labore laudantium deserunt fugiat numquam.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tour Card 3 -->
+      <article class="cardi">
+        <img class="card__background" src="{% static 'images/UAEfinal.jpg' %}" width="1920" height="2193" />
+        <div class="card__content | flow">
+          <div class="card__content--container | flow">
+            <h2 class="card__title">{% trans 'UAE' %}</h2>
+            <p class="card__description">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in
+              labore laudantium deserunt fugiat numquam.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tour Card 4 -->
+      <article class="cardi">
+        <img class="card__background" src="{% static 'images/egyptthree.jpg' %}" width="1920" height="2193" />
+        <div class="card__content | flow">
+          <div class="card__content--container | flow">
+            <h2 class="card__title">{% trans 'Egypt' %}</h2>
+            <p class="card__description">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in
+              labore laudantium deserunt fugiat numquam.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tour Card 5 -->
+      <article class="cardi">
+        <img class="card__background" src="{% static 'images/maldivestwo.jpg' %}" width="1920" height="2193" />
+        <div class="card__content | flow">
+          <div class="card__content--container | flow">
+            <h2 class="card__title">{% trans 'Maldives' %}</h2>
+            <p class="card__description">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in
+              labore laudantium deserunt fugiat numquam.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tour Card 6 -->
+      <article class="cardi">
+        <img class="card__background" src="{% static 'images/thailandfinal.jpg' %}" width="1920" height="2193" />
+        <div class="card__content | flow">
+          <div class="card__content--container | flow">
+            <h2 class="card__title">{% trans 'Thailand' %}</h2>
+            <p class="card__description">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in
+              labore laudantium deserunt fugiat numquam.
+            </p>
+          </div>
+        </div>
+      </article>
+      <!-- <div class="card">
+                <img src="{% static 'images/sixth.png' %}" alt="Tour to Antarctica" class="card-img">
+                
+                <div class="card-content">
+                    <h2>Tour to Thailand</h2>
+                    <p>12 days</p>
+                    <button class="btn">Send Request</button>
+                </div>
+            </div> -->
+    </div>
+  </section>
+  <section id="aboutus" class="about-section">
+    <div class="about-images">
+      <div class="image-container">
+        <img src="{% static 'images/beach.jpg' %}" alt="Beach resort" class="image-primary">
+      </div>
+
+    </div>
+    <div class="about-content">
+      <h2 class="about-title">{% trans 'About Us' %}</h2>
+      <p>
+        {% trans 'Navigari Travel company is your guide to the exciting world of adventure and discovery.' %}
+      </p>
+      <p>
+        {% trans 'We specialize in creating unforgettable trips around the world, organizing excursions, booking hotels and transport. Our goal is to make your vacation as comfortable and memorable as possible.' %}
+      </p>
+      <p>
+        {% trans "Whether you're looking for a relaxing beach holiday, exciting cultural excursions or outdoor adventures, we'll help you make your dreams come true." %}
+      </p>
+    </div>
+
+  </section>
+  <section id="location">
+    <div class="contact-section">
+      <h2 class="about-title">{% trans 'Our contacts' %}</h2>
+      <div class="contact-info">
+        <div class="info-item">
+          <i class="fa-solid fa-phone"></i>
+          <p>+998 91 400 56 95</p>
+        </div>
+        <div class="info-item">
+          <i class="fa-solid fa-envelope"></i>
+          <p>navigari30@gmail.com</p>
+        </div>
+        <div class="info-item">
+          <i class="fa-solid fa-clock"></i>
+          <p>{% trans 'Work hours: 9:00 - 18:00' %}</p>
+        </div>
+        <div class="info-item">
+          <i class="fa-solid fa-user"></i>
+          <p>{% trans 'Director: Oripova Kamola Davlatovna' %}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</body>
+
+<script src="https://kit.fontawesome.com/db52cfc58c.js" crossorigin="anonymous"></script>
+
+</html>

@@ -1,0 +1,52 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+</head>
+<body>
+
+    <div class="form-container">
+        <!-- Language Switch Buttons -->
+        <div class="language-switcher">
+            <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                <button type="submit" class="lang-button" name="language" value="en">English</button>
+                <button type="submit" class="lang-button" name="language" value="ru">Русский</button>
+            </form>
+        </div>
+
+        <h2 class="form-title">{% trans 'Book Your Tour' %}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {% trans 'Name:' %}
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                {% trans 'Surname:' %}
+                {{ form.surname }}
+            </div>
+            <div class="form-group">
+                {% trans 'Phone:' %}
+                {{ form.phone }}
+            </div>
+            <div class="form-group">
+                {% trans 'Country:' %}
+                {{ form.country }}
+            </div>
+            <div class="form-group">
+                {% trans 'Date:' %}
+                {{ form.event_date }}
+            </div>
+            <button type="submit" class="submit-button">{% trans 'Submit' %}</button>
+        </form>
+    </div>
+
+</body>
+</html>
