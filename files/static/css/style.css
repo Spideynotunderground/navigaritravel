@@ -384,9 +384,9 @@ section {
   right: 5%; /* Position from the right edge */
   width: 100px; /* Width of the icon */
   height: 100px; /* Height of the icon */
-  background: url("plane-icon.png") no-repeat center center;
   background-size: contain; /* Ensure the icon fits inside the dimensions */
 }
+
 
 .good {
   background-color: #f4eeea;
