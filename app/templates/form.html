@@ -1,71 +1,58 @@
-{% load static i18n %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tour Form</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
-</head>
-<body>
-
-    <div class="form-container">
-        <!-- Language Switch Buttons -->
-        <div class="language-switcher">
-            <form action="{% url 'set_language' %}" method="post">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ redirect_to }}" />
-                <button type="submit" class="lang-button" name="language" value="en">English</button>
-                <button type="submit" class="lang-button" name="language" value="ru">Русский</button>
-            </form>
-        </div>
-
-        <h2 class="form-title">{% trans 'Book Your Tour' %}</h2>
-        <form method="post" class="form-container">
-            {% csrf_token %}
-            
-            <div class="form-group">
-                <label for="id_name">{% trans 'Name:' %}</label>
-                {{ form.name }}
-            </div>
-            
-            <div class="form-group">
-                <label for="id_surname">{% trans 'Surname:' %}</label>
-                {{ form.surname }}
-            </div>
-            
-            <div class="form-group">
-                <label for="id_phone">{% trans 'Phone:' %}</label>
-                {{ form.phone }}
-            </div>
-            
-            <div class="form-group">
-                <label for="id_country">{% trans 'Country:' %}</label>
-                {{ form.country }}
-            </div>
-            
-            <div class="form-group">
-                <label for="id_event_date">{% trans 'Date:' %}</label>
-                {{ form.event_date }}
-            </div>
-            
-            <button type="submit" class="submit-button">{% trans 'Submit' %}</button>
-        </form>
-        
-        <!-- Add this script for date validation fallback on iPhone -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                var dateInput = document.querySelector('input[type="date"]');
-                if (dateInput) {
-                    var today = new Date().toISOString().split('T')[0];
-                    dateInput.setAttribute('min', today);  // Set min date to today
-                }
-            });
-        </script>
-        
+<form method="post" class="form-container" onsubmit="return validateDate()">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="id_name">{% trans 'Name:' %}</label>
+        {{ form.name }}
     </div>
+    
+    <div class="form-group">
+        <label for="id_surname">{% trans 'Surname:' %}</label>
+        {{ form.surname }}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_phone">{% trans 'Phone:' %}</label>
+        {{ form.phone }}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_country">{% trans 'Country:' %}</label>
+        {{ form.country }}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_event_date">{% trans 'Date:' %}</label>
+        {{ form.event_date }}
+    </div>
+    
+    <button type="submit" class="submit-button">{% trans 'Submit' %}</button>
+</form>
 
-</body>
+<!-- JavaScript to set min date dynamically and enforce validation -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var dateInput = document.querySelector('input[type="date"]');
+        if (dateInput) {
+            var today = new Date().toISOString().split('T')[0];  // Get today's date in YYYY-MM-DD format
+            dateInput.setAttribute('min', today);  // Set the minimum date to today
+        }
+    });
 
-</html>
+    // Additional validation to ensure no date before today is allowed
+    function validateDate() {
+        var dateInput = document.querySelector('input[type="date"]');
+        var selectedDate = new Date(dateInput.value);
+        var today = new Date();
+        
+        // Remove time part for an accurate comparison
+        today.setHours(0, 0, 0, 0);
+        selectedDate.setHours(0, 0, 0, 0);
+        
+        if (selectedDate < today) {
+            alert("The selected date cannot be earlier than today.");
+            return false;  // Prevent form submission
+        }
+        return true;
+    }
+</script>
