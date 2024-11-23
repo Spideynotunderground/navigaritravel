@@ -46,7 +46,7 @@ msgstr "Таиланд"
 
 #: .\app\templates\form.html:24
 msgid "Book Your Tour"
-msgstr "Забронийте свой тур"
+msgstr "Забронируйте свой тур"
 
 #: .\app\templates\form.html:28
 msgid "Name:"
